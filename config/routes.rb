@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  resources :works
+  resources :projects
   get 'pages/home'
   get 'pages/about'
   get 'pages/contact'
