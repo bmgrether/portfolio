@@ -29,10 +29,8 @@ class ProjectsController < ApplicationController
         respond_to do |format|
             if @project_item.update(params.require(:project).permit(:title, :subtitle, :body))
                 format.html { redirect_to projects_path, notice: 'The record successfully updated.' }
-                format.json { render :show, status: :ok, location: @project }
             else
                 format.html { render :edit }
-                format.json { render json: @project.errors, status: :unprocessable_entity }
             end
         end
     end
@@ -41,5 +39,14 @@ class ProjectsController < ApplicationController
         @project_item = Project.find(params[:id])
     end
     
+    def destroy
+        @project_item = Project.find(params[:id])
+        
+        @project_item.destroy
+        respond_to do |format|
+            format.html { redirect_to projects_url, notice: 'Project was successfully destroyed.' }
+        end
+    end
+
 end
 
