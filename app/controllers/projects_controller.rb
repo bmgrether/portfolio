@@ -1,6 +1,6 @@
 class ProjectsController < ApplicationController
     def index
-        @project_items = Project.ruby_on_rails
+        @project_items = Project.all
     end
     
     def new
