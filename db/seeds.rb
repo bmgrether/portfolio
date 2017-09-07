@@ -64,3 +64,12 @@ end
 
 puts "9 project items created"
 
+3.times do |technology|
+    Project.last.technologies.create!(
+        name: "Technology #{technology}",
+        project_id: Project.last.id)
+end
+
+puts "3 technologies created"
+    
+
