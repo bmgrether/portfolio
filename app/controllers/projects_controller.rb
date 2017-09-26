@@ -1,4 +1,5 @@
 class ProjectsController < ApplicationController
+    before_action :set_project_item, only: [:edit, :update, :show, :destroy]
     layout 'project'
     
     def index
@@ -23,12 +24,9 @@ class ProjectsController < ApplicationController
     end
     
     def edit
-        @project_item = Project.find(params[:id])
     end
     
     def update
-        @project_item = Project.find(params[:id])
-        
         respond_to do |format|
             if @project_item.update(project_params)
                 format.html { redirect_to projects_path, notice: 'The record successfully updated.' }
@@ -39,12 +37,9 @@ class ProjectsController < ApplicationController
     end
     
     def show
-        @project_item = Project.find(params[:id])
     end
     
     def destroy
-        @project_item = Project.find(params[:id])
-        
         @project_item.destroy
         respond_to do |format|
             format.html { redirect_to projects_url, notice: 'Project was successfully destroyed.' }
@@ -53,9 +48,15 @@ class ProjectsController < ApplicationController
     
     private
     
-    def project_params
-        params.require(:project).permit(:title, :subtitle, :body, technologies_attributes: [:name])
+    def set_project_item
+        @project_item = Project.find(params[:id])
     end
-
+    
+    def project_params
+        params.require(:project).permit(:title, 
+                                        :subtitle, 
+                                        :body, 
+                                        technologies_attributes: [:name])
+    end
 end
 
