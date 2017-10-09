@@ -59,4 +59,3 @@ class ProjectsController < ApplicationController
                                         technologies_attributes: [:name])
     end
 end
-
