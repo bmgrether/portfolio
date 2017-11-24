@@ -4,7 +4,7 @@ class ProjectsController < ApplicationController
     access all: [:show, :index], user: {except: [:destroy, :new, :create, :update, :edit]}, site_admin: :all
     
     def index
-        @project_items = Project.all
+        @project_items = Project.by_position
     end
     
     def new
