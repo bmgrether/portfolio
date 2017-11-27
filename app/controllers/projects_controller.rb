@@ -7,6 +7,14 @@ class ProjectsController < ApplicationController
         @project_items = Project.by_position
     end
     
+    def sort
+        params[:order].each do |key, value|
+            Project.find(value[:id]).update(position: value[:position])
+        end 
+        
+        render body: nil
+    end
+    
     def new
         @project_item = Project.new
         3.times { @project_item.technologies.build }
