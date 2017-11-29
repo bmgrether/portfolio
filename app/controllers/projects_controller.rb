@@ -1,10 +1,18 @@
 class ProjectsController < ApplicationController
     before_action :set_project_item, only: [:edit, :update, :show, :destroy]
     layout 'project'
-    access all: [:show, :index], user: {except: [:destroy, :new, :create, :update, :edit]}, site_admin: :all
+    access all: [:show, :index], user: {except: [:destroy, :new, :create, :update, :edit, :sort]}, site_admin: :all
     
     def index
-        @project_items = Project.all
+        @project_items = Project.by_position
+    end
+    
+    def sort
+        params[:order].each do |key, value|
+            Project.find(value[:id]).update(position: value[:position])
+        end 
+        
+        render body: nil
     end
     
     def new
