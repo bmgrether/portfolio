@@ -6,6 +6,9 @@ class Project < ApplicationRecord
     include Placeholder
     validates_presence_of :title, :body, :main_image, :thumb_image
     
+    mount_uploader :thumb_image, ProjectUploader
+    mount_uploader :main_image, ProjectUploader
+    
     def self.ruby_on_rails
         where(subtitle: "Ruby on Rails")
     end
